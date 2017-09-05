@@ -14,27 +14,27 @@ namespace CPE200Lab1
     {
         private bool isNumberPart = false;
         private bool isContainDot = false;
-        private CalculatorEngine engine;
+        private RPNCalculatorEngine engine;
         public ExtendForm()
         {
             InitializeComponent();
-            engine = new CalculatorEngine();
+            engine = new RPNCalculatorEngine();
         }
 
         private string getLastInString(string str)
         {
-            if (str.Length is 1)
+            if (str.Length == 1)
                 return str;
             return str.Substring(str.Length - 1);
         }
 
         private void btnNumber_Click(object sender, EventArgs e)
         {
-            if (lblDisplay.Text is "Error")
+            if (lblDisplay.Text == "Error")
             {
                 return;
             }
-            if (lblDisplay.Text is "0")
+            if (lblDisplay.Text == "0")
             {
                 lblDisplay.Text = "";
             }
@@ -48,7 +48,7 @@ namespace CPE200Lab1
 
         private void btnBinaryOperator_Click(object sender, EventArgs e)
         {
-            if (lblDisplay.Text is "Error")
+            if (lblDisplay.Text == "Error")
             {
                 return;
             }
@@ -59,20 +59,20 @@ namespace CPE200Lab1
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            if (lblDisplay.Text is "Error")
+            if (lblDisplay.Text == "Error")
             {
                 return;
             }
-            // check if the last one is operator
+            // check if the last one == operator
             string current = lblDisplay.Text;
-            if (getLastInString(current) is " ")
+            if (getLastInString(current) == " ")
             {
                 lblDisplay.Text = current.Substring(0, current.Length - 3);
             } else
             {
                 lblDisplay.Text = current.Substring(0, current.Length - 1);
             }
-            if (lblDisplay.Text is "")
+            if (lblDisplay.Text == "")
             {
                 lblDisplay.Text = "0";
             }
@@ -87,8 +87,9 @@ namespace CPE200Lab1
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
+            engine.testStackMethod();
             string result = engine.Process(lblDisplay.Text);
-            if (result is "E")
+            if (result == "E")
             {
                 lblDisplay.Text = "Error";
             } else
@@ -99,7 +100,7 @@ namespace CPE200Lab1
 
         private void btnSign_Click(object sender, EventArgs e)
         {
-            if (lblDisplay.Text is "Error")
+            if (lblDisplay.Text == "Error")
             {
                 return;
             }
@@ -108,13 +109,13 @@ namespace CPE200Lab1
                 return;
             }
             string current = lblDisplay.Text;
-            if (current is "0")
+            if (current == "0")
             {
                 lblDisplay.Text = "-";
-            } else if (getLastInString(current) is "-")
+            } else if (getLastInString(current) == "-")
             {
                 lblDisplay.Text = current.Substring(0, current.Length - 1);
-                if (lblDisplay.Text is "")
+                if (lblDisplay.Text == "")
                 {
                     lblDisplay.Text = "0";
                 }
