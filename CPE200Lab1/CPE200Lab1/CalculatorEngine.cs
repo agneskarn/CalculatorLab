@@ -8,13 +8,13 @@ namespace CPE200Lab1
 {
     class CalculatorEngine
     {
-        private bool isNumber(string str)
+        public bool isNumber(string str)
         {
             double retNum;
             return Double.TryParse(str, out retNum);
         }
 
-        private bool isOperator(string str)
+        public bool isOperator(string str)
         {
             switch (str)
             {
@@ -22,6 +22,9 @@ namespace CPE200Lab1
                 case "-":
                 case "X":
                 case "÷":
+                case "√":
+                case "1/x":
+                case "%":
                     return true;
             }
             return false;
@@ -45,12 +48,16 @@ namespace CPE200Lab1
             switch (operate)
             {
                 case "√":
-                    {
+                    try {
                         double result;
                         string[] parts;
                         int remainLength;
 
                         result = Math.Sqrt(Convert.ToDouble(operand));
+
+                        //if (isNumber(result.ToString()))
+                            //throw new Exception();
+
                         // split between integer part and fractional part
                         parts = result.ToString().Split('.');
                         // if integer part length is already break max output, return error
@@ -62,6 +69,10 @@ namespace CPE200Lab1
                         remainLength = maxOutputSize - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
                         return result.ToString("N" + remainLength);
+                    }
+                    catch (Exception exception)
+                    {
+                        return "Exception has been throw.";
                     }
                 case "1/x":
                     if (operand != "0")
@@ -84,6 +95,7 @@ namespace CPE200Lab1
                         return result.ToString("N" + remainLength);
                     }
                     break;
+                
             }
             return "E";
         }
@@ -100,8 +112,8 @@ namespace CPE200Lab1
                     return (Convert.ToDouble(firstOperand) * Convert.ToDouble(secondOperand)).ToString();
                 case "÷":
                     // Not allow devide be zero
-                    if (secondOperand != "0")
-                    {
+                    //if (secondOperand != "0")
+                    try { 
                         double result;
                         string[] parts;
                         int remainLength;
@@ -119,9 +131,16 @@ namespace CPE200Lab1
                         // trim the fractional part gracefully. =
                         return result.ToString("N" + remainLength);
                     }
+                    catch (Exception exception)
+                    {
+                        return "Exception has been throw.";
+                    }
+                  
                     break;
                 case "%":
-                    //your code here
+                    double total;
+                    total = ((Convert.ToDouble(secondOperand) / 100 * Convert.ToDouble(firstOperand)));
+                    return total.ToString();
                     break;
             }
             return "E";
