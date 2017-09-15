@@ -112,22 +112,30 @@ namespace CPE200Lab1
                     // Not allow devide be zero
                     if (secondOperand != "0")
                     {
-                        double result;
                         string[] parts;
+                        double result;
                         int remainLength;
-
                         result = (Convert.ToDouble(firstOperand) / Convert.ToDouble(secondOperand));
-                        // split between integer part and fractional part
-                        parts = result.ToString().Split('.');
-                        // if integer part length is already break max output, return error
-                        if (parts[0].Length > maxOutputSize)
+                        if (Convert.ToDouble(firstOperand) % Convert.ToDouble(secondOperand) == 0)
                         {
-                            return "E";
+                            return result.ToString();
+                            //return Convert.ToString(Convert.ToDouble(firstOperand) / Convert.ToDouble(secondOperand));
                         }
-                        // calculate remaining space for fractional part.
-                        remainLength = maxOutputSize - parts[0].Length - 1;
-                        // trim the fractional part gracefully. =
-                        return result.ToString("N" + remainLength);
+                        //else if (Convert.ToDouble(firstOperand) % Convert.ToDouble(secondOperand) != 0)
+                                           
+                            // split between integer part and fractional part
+                            parts = result.ToString().Split('.');
+                            // if integer part length is already break max output, return error
+                            if (parts[0].Length > maxOutputSize)
+                            {
+                                return "E";
+                            }
+                            // calculate remaining space for fractional part.                   
+                                remainLength = maxOutputSize - parts[0].Length - 2;
+                            // trim the fractional part gracefully. =
+                            result = Math.Round(result, 4);
+                            return result.ToString();//("N" + remainLength);
+                       
                     }
                     break;
                 case "%":
