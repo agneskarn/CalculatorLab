@@ -8,7 +8,7 @@ namespace CPE200Lab1
 {
     public class CalculatorEngine
     {
-        protected bool isNumber(string str)
+        protected bool isNumber(string str) // protected = class ที่สืบอดไปได้
         {
             double retNum;
             return Double.TryParse(str, out retNum);
