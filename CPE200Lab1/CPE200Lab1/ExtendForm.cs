@@ -12,6 +12,10 @@ namespace CPE200Lab1
 {
     public partial class ExtendForm : Form
     {
+        protected RPNCalculatorEngine myEngine;
+        protected bool hasDot;
+        protected string oper;
+
         private bool isNumberPart = false;
         private bool isContainDot = false;
         private bool isSpaceAllowed = false;

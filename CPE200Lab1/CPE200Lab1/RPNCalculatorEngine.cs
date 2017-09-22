@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace CPE200Lab1
 {
     public class RPNCalculatorEngine : CalculatorEngine
-    {       string result;
-        public new string Process(string str)
+    {   string result;
+        protected Stack<string> myStack ;
+
+        public string calculate(string str)
         {
             if (str == null || str == "")
             { return "E"; }
