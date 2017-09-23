@@ -18,9 +18,9 @@ namespace CPE200Lab1
             {
                 return "0";
             }
-            
 
-            Stack<string> rpnStack = new Stack<string>();
+            myStack = new Stack<string>();
+            //Stack<string> rpnStack = new Stack<string>();
             List<string> parts = str.Split(' ').ToList<string>();
             
             string firstOperand, secondOperand;
@@ -38,21 +38,21 @@ namespace CPE200Lab1
                         }
                     }
 
-                    rpnStack.Push(token);
+                    myStack.Push(token);
                 }
                 else if (isOperator(token))
                 {
                     //FIXME, what if there ==only one left in stack?
                     try
                     {
-                        secondOperand = rpnStack.Pop();
-                        firstOperand = rpnStack.Pop();
+                        secondOperand = myStack.Pop();
+                        firstOperand = myStack.Pop();
                         result = calculate(token, firstOperand, secondOperand, 4);
                         if (result == "E")
                         {
                             return result;
                         }
-                        rpnStack.Push(result);
+                        myStack.Push(result);
                     }
                     catch
                     {
@@ -64,20 +64,20 @@ namespace CPE200Lab1
                 {
                     return "E";
                 }
-                   // rpnStack.Push(result);
+                   // myStack.Push(result);
                 
             }
             //FIXME, what if there ==more than one, or zero, items in the stack?
-            if (rpnStack.Count() == 0 || rpnStack.Count() > 1)
+            if (myStack.Count() == 0 || myStack.Count() > 1)
             {
                 return "E";
             }
             else
             {
-                result = rpnStack.Pop();
+                result = myStack.Pop();
                 return result;
             }
-                 //result = rpnStack.Pop();
+                 //result = myStack.Pop();
             
         }
     }
